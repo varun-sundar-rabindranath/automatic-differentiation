@@ -42,7 +42,7 @@ class ndarray_(np_.ndarray):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ")
+        print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -75,6 +75,265 @@ class ndarray_(np_.ndarray):
         #    if item.startswith("__") and callable(getattr(self, item)) and type(getattr(self, item)) is not type:
         #        setattr(self, item, primitive(getattr(self, item)))
 
+#int8	Byte (-128 to 127)
+class int8_(np_.int8):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#int16	Integer (-32768 to 32767)
+class int16_(np_.int16):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#int32	Integer (-2147483648 to 2147483647)
+class int32_(np_.int32):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#int64	Integer (-9223372036854775808 to 9223372036854775807)
+class int64_(np_.int64):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#uint8	Unsigned integer (0 to 255)
+class uint8_(np_.uint8):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+
+#uint16	Unsigned integer (0 to 65535)
+class uint16_(np_.uint16):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#uint32	Unsigned integer (0 to 4294967295)
+class uint32_(np_.uint32):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#uint64	Unsigned integer (0 to 18446744073709551615)
+class uint64_(np_.uint64):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+
+#float_	Shorthand for float64.
+#float16	Half precision float: sign bit, 5 bits exponent, 10 bits mantissa
+class float16_(np_.float16):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#float32	Single precision float: sign bit, 8 bits exponent, 23 bits mantissa
+class float32_(np_.float32):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+#float64	Double precision float: sign bit, 11 bits exponent, 52 bits mantissa
+class float64_(np_.float64):
+
+    alias = None
+
+    @classmethod
+    def wrap_attrs(self):
+
+        print ("Wrapping ", self.__name__)
+        self.__neg__ = primitive(self.__neg__)
+        self.__add__ = primitive(self.__add__)
+        self.__sub__ = primitive(self.__sub__)
+        self.__mul__ = primitive(self.__mul__)
+        self.__pow__ = primitive(self.__pow__)
+        self.__div__ = primitive(self.__div__)
+        self.__abs__ = primitive(self.__abs__)
+        self.__eq__ = primitive(self.__eq__)
+        self.__ne__ = primitive(self.__ne__)
+        self.__gt__ = primitive(self.__gt__)
+        self.__ge__ = primitive(self.__ge__)
+        self.__lt__ = primitive(self.__lt__)
+        self.__le__ = primitive(self.__le__)
+
+# wrapped types
+wrapped_types = {np_.ndarray : ndarray_, np_.int8 : int8_, np_.int16 : int16_, np_.int32 : int32_, np_.int64 : int64_, np_.uint8 : uint8_, np_.uint16 : uint16_, np_.uint32 : uint32_, np_.uint64 : uint64_, np_.float16 : float16_, np_.float32 : float32_, np_.float64 : float64_}
+
 for name, obj in np_.__dict__.items():
 
     # wrap all values
@@ -84,3 +343,4 @@ for name, obj in np_.__dict__.items():
         globals()[name] = obj
 
 globals()['ndarray'] = ndarray_
+

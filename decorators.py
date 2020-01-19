@@ -29,6 +29,15 @@ def say_adnp(func):
 def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
+
+        # what if the inputs are of wrapped types ?
+        args_lst = list(args)
+        for arg in args_lst:
+            if anp.wrapped_types.get(type(arg)) is not None:
+                arg.__class__ = anp.wrapped_types[type(arg)]
+                arg.wrap_attrs()
+                arg.alias = names.get_uniq_name()
+
         print (func)
         ret = func(*args, **kwargs)
 
@@ -37,12 +46,20 @@ def primitive(func):
         #print ("np.ndarray ", np.ndarray)
         #print (anp.ndarray_ == np.ndarray)
 
-        if type(ret) == anp.ndarray_ and ret.alias == None:
+        if anp.wrapped_types.get(type(ret)) is not None:
+
+            print ("ret type : ", type(ret))
+            print ("anp.wrapped_types.keys() ", anp.wrapped_types.keys())
+            print ("wrapped class : ", anp.wrapped_types[type(ret)])
+
+            # make a wrapped type instead
+            ret.__class__ = anp.wrapped_types[type(ret)]
+            ret.wrap_attrs()
             ret.alias = names.get_uniq_name()
 
-        if type(ret) is np.ndarray:
-            print ("wrapping return types")
-            ret.view(anp.ndarray_).wrap_attrs()
+        if type(ret) in anp.wrapped_types.values() and ret.alias == None:
+            ret.alias = names.get_uniq_name()
 
         return ret
+
     return wrapper_primitive_
