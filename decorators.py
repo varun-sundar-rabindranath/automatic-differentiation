@@ -2,6 +2,7 @@
 from functools import wraps
 import ad_numpy as anp
 import numpy as np
+import names
 
 def print_args(func):
 
@@ -35,6 +36,9 @@ def primitive(func):
         #print ("anp.ndarray_ ", anp.ndarray_)
         #print ("np.ndarray ", np.ndarray)
         #print (anp.ndarray_ == np.ndarray)
+
+        if type(ret) == anp.ndarray_ and ret.alias == None:
+            ret.alias = names.get_uniq_name()
 
         if type(ret) is np.ndarray:
             print ("wrapping return types")

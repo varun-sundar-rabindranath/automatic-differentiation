@@ -3,8 +3,25 @@ from functools import wraps
 
 from decorators import *
 
+#class ndarray_(np.ndarray):
+#    pass
+#
+#def change_ndarray(func):
+#    @wraps(func)
+#    def wrapper(*args, **kwargs):
+#        return func(*args, **kwargs).view(ndarray_)
+#    return wrapper
+#
+#def change_numpy(func):
+#    @wraps(func)
+#    def wrapper(*args, **kwargs):
+#        return func(*args, **kwargs)
+#    return wrapper
+
 # wrapper around ndarray classes
 class ndarray_(np_.ndarray):
+
+    alias = None
 
     def __new__(cls, name, bases, local):
         #print ("ndarray_ __new__ is called")
@@ -57,21 +74,6 @@ class ndarray_(np_.ndarray):
         #        continue
         #    if item.startswith("__") and callable(getattr(self, item)) and type(getattr(self, item)) is not type:
         #        setattr(self, item, primitive(getattr(self, item)))
-
-#class ndarray_(np.ndarray):
-#    pass
-#
-#def change_ndarray(func):
-#    @wraps(func)
-#    def wrapper(*args, **kwargs):
-#        return func(*args, **kwargs).view(ndarray_)
-#    return wrapper
-#
-#def change_numpy(func):
-#    @wraps(func)
-#    def wrapper(*args, **kwargs):
-#        return func(*args, **kwargs)
-#    return wrapper
 
 for name, obj in np_.__dict__.items():
 
