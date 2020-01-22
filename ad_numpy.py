@@ -23,21 +23,21 @@ class ndarray_(np_.ndarray):
 
     alias = None
 
-    def __new__(cls, name, bases, local):
-        #print ("ndarray_ __new__ is called")
-        #for attr in local:
-        #    value = local[attr]
-        #    if callable(value):
-        #        print ("Value ", value)
-        #        local[attr] = primitive(value)
-        print ("__new__")
-        self.wrap_attrs()
-        return type.__new__(cls, name, bases, local)
+    #def __new__(cls, name, bases, local):
+    #    #print ("ndarray_ __new__ is called")
+    #    #for attr in local:
+    #    #    value = local[attr]
+    #    #    if callable(value):
+    #    #        print ("Value ", value)
+    #    #        local[attr] = primitive(value)
+    #    print ("__new__")
+    #    self.wrap_attrs()
+    #    return type.__new__(cls, name, bases, local)
 
-    def __init__(self, *args, **kwargs):
-        print ("__init__")
-        self.wrap_attrs()
-        return super(self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    print ("__init__")
+    #    self.wrap_attrs()
+    #    return super(self).__init__(*args, **kwargs)
 
     @classmethod
     def wrap_attrs(self):
@@ -158,7 +158,7 @@ class int64_(np_.int64):
         self.__sub__ = primitive(self.__sub__)
         self.__mul__ = primitive(self.__mul__)
         self.__pow__ = primitive(self.__pow__)
-        self.__div__ = primitive(self.__div__)
+        #self.__div__ = primitive(self.__div__)
         self.__abs__ = primitive(self.__abs__)
         self.__eq__ = primitive(self.__eq__)
         self.__ne__ = primitive(self.__ne__)
@@ -166,6 +166,12 @@ class int64_(np_.int64):
         self.__ge__ = primitive(self.__ge__)
         self.__lt__ = primitive(self.__lt__)
         self.__le__ = primitive(self.__le__)
+
+        self.__array__ = primitive(self.__array__)
+        self.__array_interface__ = primitive(self.__array_interface__)
+        self.__array_priority__ = primitive(self.__array_priority__)
+        self.__array_struct__ = primitive(self.__array_struct__)
+        self.__array_wrap__ = primitive(self.__array_wrap__)
 
 #uint8	Unsigned integer (0 to 255)
 class uint8_(np_.uint8):
@@ -333,6 +339,7 @@ class float64_(np_.float64):
 
 # wrapped types
 wrapped_types = {np_.ndarray : ndarray_, np_.int8 : int8_, np_.int16 : int16_, np_.int32 : int32_, np_.int64 : int64_, np_.uint8 : uint8_, np_.uint16 : uint16_, np_.uint32 : uint32_, np_.uint64 : uint64_, np_.float16 : float16_, np_.float32 : float32_, np_.float64 : float64_}
+scalar_wrapper_types = {np_.int8 : int8_, np_.int16 : int16_, np_.int32 : int32_, np_.int64 : int64_, np_.uint8 : uint8_, np_.uint16 : uint16_, np_.uint32 : uint32_, np_.uint64 : uint64_, np_.float16 : float16_, np_.float32 : float32_, np_.float64 : float64_}
 
 for name, obj in np_.__dict__.items():
 
@@ -342,5 +349,4 @@ for name, obj in np_.__dict__.items():
     else:
         globals()[name] = obj
 
-globals()['ndarray'] = ndarray_
-
+#globals()['ndarray'] = ndarray_

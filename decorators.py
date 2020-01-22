@@ -34,26 +34,28 @@ def primitive(func):
         args_lst = list(args)
         for arg in args_lst:
             if anp.wrapped_types.get(type(arg)) is not None:
-                arg.__class__ = anp.wrapped_types[type(arg)]
+
+                # should we scalar wrap this ?
+                if anp.scalar_wrapper_types.get(type(arg)) is not None:
+                    arg = anp.scalar_wrapper_types.get(type(arg))(arg)
+                else:
+                    arg = arg.view(anp.wrapped_types.get(type(arg)))
+                # assign wrappers and unique names
                 arg.wrap_attrs()
                 arg.alias = names.get_uniq_name()
 
         print (func)
         ret = func(*args, **kwargs)
 
-        #print ("primitive func ret type : ", type(ret))
-        #print ("anp.ndarray_ ", anp.ndarray_)
-        #print ("np.ndarray ", np.ndarray)
-        #print (anp.ndarray_ == np.ndarray)
+        print ("ret type ", type(ret), " | ", anp.wrapped_types.get(type(ret)))
 
         if anp.wrapped_types.get(type(ret)) is not None:
 
-            print ("ret type : ", type(ret))
-            print ("anp.wrapped_types.keys() ", anp.wrapped_types.keys())
-            print ("wrapped class : ", anp.wrapped_types[type(ret)])
+            if anp.scalar_wrapper_types.get(type(ret)) is not None:
+                ret = anp.scalar_wrapper_types.get(type(ret))(ret)
+            else:
+                ret = ret.view(anp.wrapped_types.get(type(ret)))
 
-            # make a wrapped type instead
-            ret.__class__ = anp.wrapped_types[type(ret)]
             ret.wrap_attrs()
             ret.alias = names.get_uniq_name()
 
