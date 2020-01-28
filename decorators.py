@@ -30,6 +30,9 @@ def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
+        #g.a = g.a + 1
+        anp.cgraph.a = anp.cgraph.a + 1
+
         # what if the inputs are of wrapped types ?
         args_lst = list(args)
         for arg in args_lst:

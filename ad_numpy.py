@@ -1,7 +1,9 @@
 import numpy as np_
 from functools import wraps
-
 from decorators import *
+from graph import Graph
+
+cgraph = Graph()
 
 #class ndarray_(np.ndarray):
 #    pass

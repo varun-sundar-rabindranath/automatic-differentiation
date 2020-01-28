@@ -13,3 +13,5 @@ print ("A type : ", type(a), " | Name : ", a.alias)
 print ("B type : ", type(b), " | Name : ", b.alias)
 print ("C type : ", type(c), " | Name : ", c.alias)
 print ("D type : ", type(d), " | Name : ", d.alias)
+
+print ("g.a : ", anp.cgraph.a)
