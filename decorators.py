@@ -31,11 +31,6 @@ def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
-        #if func.__class__.__name__ is not "function":
-        #    ret = func(*args, **kwargs)
-        #    return ret
-
-
         # what if the inputs are of wrapped types ?
         args_lst = list(args)
         for arg in args_lst:
@@ -69,11 +64,13 @@ def primitive(func):
             ret.alias = names.get_uniq_name()
 
         # make a node for the graph
-        n = Node()
-        n.make_node(args = args, kwargs = kwargs, outputs = ret, op = func, name = ret.alias)
-        anp.cgraph.add_node(n)
+        if func.__class__.__name__ == "function":
+            # only functions are nodes
+            n = Node()
+            n.make_node(args = args, kwargs = kwargs, outputs = ret, op = func, name = ret.alias)
+            anp.cgraph.add_node(n)
 
-        print ("Node : ", n)
+        #print ("Node : ", n)
 
         return ret
 

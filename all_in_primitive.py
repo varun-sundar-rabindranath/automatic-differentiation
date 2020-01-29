@@ -15,3 +15,4 @@ print ("C type : ", type(c), " | Name : ", c.alias)
 print ("D type : ", type(d), " | Name : ", d.alias)
 
 print ("g.a : ", anp.cgraph.a)
+anp.cgraph.print_nodes()

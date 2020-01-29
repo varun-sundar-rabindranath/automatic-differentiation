@@ -12,3 +12,7 @@ class Graph:
 
     def add_node(self, n):
         self.nodes.append(n)
+
+    def print_nodes(self):
+        for n in self.nodes:
+            print (n)
