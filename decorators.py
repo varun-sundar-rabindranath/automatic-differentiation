@@ -1,6 +1,7 @@
 
 from functools import wraps
 import ad_numpy as anp
+from node import Node
 import numpy as np
 import names
 
@@ -30,8 +31,10 @@ def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
-        #g.a = g.a + 1
-        anp.cgraph.a = anp.cgraph.a + 1
+        #if func.__class__.__name__ is not "function":
+        #    ret = func(*args, **kwargs)
+        #    return ret
+
 
         # what if the inputs are of wrapped types ?
         args_lst = list(args)
@@ -47,10 +50,10 @@ def primitive(func):
                 arg.wrap_attrs()
                 arg.alias = names.get_uniq_name()
 
-        print (func)
+        #print (func)
         ret = func(*args, **kwargs)
 
-        print ("ret type ", type(ret), " | ", anp.wrapped_types.get(type(ret)))
+        #print ("ret type ", type(ret), " | ", anp.wrapped_types.get(type(ret)))
 
         if anp.wrapped_types.get(type(ret)) is not None:
 
@@ -64,6 +67,13 @@ def primitive(func):
 
         if type(ret) in anp.wrapped_types.values() and ret.alias == None:
             ret.alias = names.get_uniq_name()
+
+        # make a node for the graph
+        n = Node()
+        n.make_node(args = args, kwargs = kwargs, outputs = ret, op = func, name = ret.alias)
+        anp.cgraph.add_node(n)
+
+        print ("Node : ", n)
 
         return ret
 

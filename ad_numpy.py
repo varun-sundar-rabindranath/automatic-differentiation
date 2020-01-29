@@ -44,7 +44,7 @@ class ndarray_(np_.ndarray):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -85,7 +85,7 @@ class int8_(np_.int8):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -108,7 +108,7 @@ class int16_(np_.int16):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -131,7 +131,7 @@ class int32_(np_.int32):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -154,7 +154,7 @@ class int64_(np_.int64):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -183,7 +183,7 @@ class uint8_(np_.uint8):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -207,7 +207,7 @@ class uint16_(np_.uint16):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -230,7 +230,7 @@ class uint32_(np_.uint32):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -253,7 +253,7 @@ class uint64_(np_.uint64):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -278,7 +278,7 @@ class float16_(np_.float16):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -301,7 +301,7 @@ class float32_(np_.float32):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
@@ -324,7 +324,7 @@ class float64_(np_.float64):
     @classmethod
     def wrap_attrs(self):
 
-        print ("Wrapping ", self.__name__)
+        #print ("Wrapping ", self.__name__)
         self.__neg__ = primitive(self.__neg__)
         self.__add__ = primitive(self.__add__)
         self.__sub__ = primitive(self.__sub__)
