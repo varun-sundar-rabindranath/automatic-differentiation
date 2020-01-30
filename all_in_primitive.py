@@ -7,7 +7,7 @@ b = anp.asarray([4,5,6])
 print ("a ", a, " | b ", b)
 
 c = a + b
-d = anp.dot(a, b)
+d = anp.dot(c, b)
 
 print ("A type : ", type(a), " | Name : ", a.alias)
 print ("B type : ", type(b), " | Name : ", b.alias)
@@ -16,3 +16,4 @@ print ("D type : ", type(d), " | Name : ", d.alias)
 
 print ("g.a : ", anp.cgraph.a)
 anp.cgraph.print_nodes()
+anp.cgraph.print_edges()

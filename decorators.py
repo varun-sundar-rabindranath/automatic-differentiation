@@ -27,39 +27,55 @@ def say_adnp(func):
 
     return wrapper_say_adnp
 
+def wrap_thing(thing):
+
+    # do we have a wrapper for this thing's  type ?
+    if anp.wrapped_types.get(type(thing)) is not None:
+
+        # should we scalar wrap this ?
+        if anp.scalar_wrapper_types.get(type(thing)) is not None:
+            thing = anp.scalar_wrapper_types.get(type(thing))(thing)
+        else:
+            thing = thing.view(anp.wrapped_types.get(type(thing)))
+
+        # assign wrappers and unique names
+        thing.wrap_attrs()
+        thing.alias = names.get_uniq_name()
+
+    return thing
+
+def wrap_args(args):
+
+    args_lst = list(args)
+
+    args_lst = map(lambda arg: wrap_thing(arg), args_lst)
+
+    return tuple(args_lst)
+
+def wrap_kwargs(kwargs):
+
+    for k, v in kwargs.items():
+        kwargs[k] = wrap_thing(v)
+
+    return kwargs
+
+
 def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
         # what if the inputs are of wrapped types ?
-        args_lst = list(args)
-        for arg in args_lst:
-            if anp.wrapped_types.get(type(arg)) is not None:
-
-                # should we scalar wrap this ?
-                if anp.scalar_wrapper_types.get(type(arg)) is not None:
-                    arg = anp.scalar_wrapper_types.get(type(arg))(arg)
-                else:
-                    arg = arg.view(anp.wrapped_types.get(type(arg)))
-                # assign wrappers and unique names
-                arg.wrap_attrs()
-                arg.alias = names.get_uniq_name()
+        args = wrap_args(args)
+        kwargs = wrap_kwargs(kwargs)
 
         #print (func)
         ret = func(*args, **kwargs)
 
-        #print ("ret type ", type(ret), " | ", anp.wrapped_types.get(type(ret)))
+        ret = wrap_thing(ret)
 
-        if anp.wrapped_types.get(type(ret)) is not None:
-
-            if anp.scalar_wrapper_types.get(type(ret)) is not None:
-                ret = anp.scalar_wrapper_types.get(type(ret))(ret)
-            else:
-                ret = ret.view(anp.wrapped_types.get(type(ret)))
-
-            ret.wrap_attrs()
-            ret.alias = names.get_uniq_name()
-
+        # the return value type is sometimes inferred from the type of
+        # the inputs; then, the names dont get assigned
+        #assert type(ret) in anp.wrapped_types.values()
         if type(ret) in anp.wrapped_types.values() and ret.alias == None:
             ret.alias = names.get_uniq_name()
 
@@ -70,7 +86,13 @@ def primitive(func):
             n.make_node(args = args, kwargs = kwargs, outputs = ret, op = func, name = ret.alias)
             anp.cgraph.add_node(n)
 
-        #print ("Node : ", n)
+            # edges are between the inputs and the outputs
+            # get alias names of stuff in args and kwargs
+            edge_src = list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), list(args))) + \
+                       list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), kwargs.values()))
+
+            for u in edge_src:
+                anp.cgraph.add_edge(u.alias, ret.alias)
 
         return ret
 
