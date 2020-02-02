@@ -64,6 +64,14 @@ def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
+        print ("function ", func)
+        args_lst = list(args)
+        for arg in args_lst:
+            print("Arg ", arg)
+        for kw in kwargs.keys():
+            print("KW : ", kw, " | ", kwargs[kw])
+
+
         # what if the inputs are of wrapped types ?
         args = wrap_args(args)
         kwargs = wrap_kwargs(kwargs)
