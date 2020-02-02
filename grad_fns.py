@@ -1,16 +1,17 @@
 # gradient calculating functions
 
 import numpy as np
+from ad_numpy import wrapped_types
 
 # a and b are the 1D input vectors are c is the output scalar
 # return gradients w.r.t a and b in that order
-def dot_1Dx1D_grad(a, b, c):
+def dot_1Dx1D_grad(a, b, c, crule_grad):
     # sanity check
     assert len(shape(a)) == 1
     assert len(shape(b)) == 1
-    return b, a
+    return b * crule_grad, a * crule_grad
 
-def dot_2Dx2D_grad(a, b, c):
+def dot_2Dx2D_grad(a, b, c, crule_grad):
 
     # sanity check
     assert len(shape(a)) == 2
@@ -31,7 +32,7 @@ def dot_2Dx2D_grad(a, b, c):
             gb[:,j] = gb[:,j] + g_bj
             ga[i,:] = ga[i,:] + g_ai
 
-    return ga, gb
+    return ga * crule_grad, gb * crule_grad
 
 def dot_1Dx2D_grad(a, b, c):
 
@@ -52,9 +53,9 @@ def dot_1Dx2D_grad(a, b, c):
             gb[:,j] = gb[:,j] + g_bj
             ga = ga + g_a
 
-    return ga, gb
+    return ga * crule_grad, gb * crule_grad
 
-def dot_2Dx1D_grad(a, b, c):
+def dot_2Dx1D_grad(a, b, c, crule_grad):
 
     # sanity check
     assert len(shape(a)) == 2
@@ -73,29 +74,37 @@ def dot_2Dx1D_grad(a, b, c):
         gb = gb + g_b
         ga[i,:] = ga[i,:] + g_ai
 
-    return ga, gb
+    return ga * crule_grad, gb * crule_grad
 
 # return gradients w.r.t to the input a and b in that order
-def dot_grad(args, kwargs, output):
+def dot_grad(args, kwargs, output, crule_grad):
     a = args[0]
     b = args[1]
 
     assert len(a.shape) <= 2 and "grad function for more dimensions not supported"
     assert len(b.shape) <= 2 and "grad function for more dimensions not supported"
 
-    ga = np.zeros_like(a)
-    gb = np.zeros_like(b)
+    ga = None
+    gb = None
 
     if len(a.shape) == 1 and len(b.shape) == 1:
-        return dot_1Dx1D_grad(a, b, output)
+        ga, gb = dot_1Dx1D_grad(a, b, output, crule_grad)
 
     if len(a.shape) == 2 and len(b.shape) == 2:
-        return dot_2Dx2D_grad(a, b, output)
+        ga, gb = dot_2Dx2D_grad(a, b, output, crule_grad)
 
     if len(a.shape) == 1 and len(b.shape) == 2:
-        return dot_1Dx2D_grad(a, b, output)
+        ga, gb = dot_1Dx2D_grad(a, b, output, crule_grad)
 
     if len(a.shape) == 2 and len(b.shape) == 1:
-        return dot_2Dx1D_grad(a, b, output)
+        ga, gb = dot_2Dx1D_grad(a, b, output, crule_grad)
 
-    assert False and "Condition not handled"
+    return {a.alias : ga, b.alias : gb}
+
+def identity_grad(args, kwargs, output, crule_grad):
+
+    ig = {}
+    for arg in args:
+        if type(arg) in wrapped_types.values():
+            ig[arg.alias] = crule_grad
+    return ig

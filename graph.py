@@ -8,14 +8,16 @@ class Graph:
     # constructor
     def __init__(self):
         self.a = 0
-        self.nodes = []
+        self.nodes = {}
         self.edges = {}
 
     def make_graph(self, outputs):
         pass
 
     def add_node(self, n):
-        self.nodes.append(n)
+        assert self.nodes.get(n.alias) is None and "Node of this name already available"
+        assert n.alias is not None and "Node has no name"
+        self.nodes[n.alias] = n
 
     def add_edge(self, u, v):
         if self.edges.get(u) is None:
@@ -24,7 +26,7 @@ class Graph:
             self.edges[u].append(v)
 
     def print_nodes(self):
-        for n in self.nodes:
+        for n in self.nodes.values():
             print (n)
 
     def print_edges(self):
@@ -38,10 +40,52 @@ class Graph:
             for v in vs:
                 edgeslist.append((u, v))
 
-        draw_graph(self.nodes, edgeslist)
+        draw_graph(self.nodes.values(), edgeslist)
 
     def backprop(self):
-        pass
+        # Algorithm
+        # 1. toposort
+        # // working with the top node
+        # 2. from the top; seed it; i.e. gradient w.r.t to itself is 1
+        # 3. calculate gradients w.r.t. the inputs; search the global
+        #    datastructure for the appropritate grad function
+        # // move on to the next node
+        # 4. calculate gradient w.r.t. to it by adding from its parents
+        # 5. again calculate gradiets w.r.t. the inputs;
+        # 6. move on to the next node and so on
+
+        # 1. toposort
+        backprop_order = self.toposort()
+
+        for node_alias in backprop_order:
+            assert self.nodes.get(node_alias) is not None and "No such node"
+            backprop_node = self.nodes.get(node_alias)
+
+            # gradient of self w.r.t the output of concern
+            if node_alias == backprop_order[0]:
+                # topnode; seed it
+                backprop_node.grad = 1.0
+            else:
+                # sum from parents; since we are going backwards
+                # the actual edges are the parents
+                g = 0.0
+                for parent in self.edges[backprop_node.alias]:
+                    if parent.grad_wrt_args.get(backprop_node.alias) is not None:
+                        g = g + parent.grad_wrt_args.get(backprop_node.alias)
+                    if parent.grad_wrt_kwargs.get(backprop_node.alias) is not None:
+                        g = g + parent.grad_wrt_kwargs.get(backprop_node.alias)
+                backprop_node.grad = g
+
+            assert backprop_node.grad_fn is not None and "can't calc. gradient"
+
+            # gradients w.r.t the inputs
+            backprop_node.grad_wrt_args = \
+                    backprop_node.grad_fn(backprop_node.inputs["args"], \
+                                          backprop_node.inputs["kwargs"], \
+                                          backprop_node.outputs, \
+                                          backprop_node.grad)
+            # TODO : Impl gradients w.r.t kwargs
+
 
     def toposort(self):
 
