@@ -108,3 +108,6 @@ def identity_grad(args, kwargs, output, crule_grad):
         if type(arg) in wrapped_types.values():
             ig[arg.alias] = crule_grad
     return ig
+
+# function - gradient function mapping
+grad_fn_mapping = {np.dot : dot_grad, np.asarray : identity_grad}

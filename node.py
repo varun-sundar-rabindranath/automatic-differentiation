@@ -1,6 +1,6 @@
 # Node class for graph
 
-from ad_numpy import wrapped_types, grad_fn_mapping
+from grad_fns import grad_fn_mapping
 
 class Node:
 

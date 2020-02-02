@@ -345,9 +345,6 @@ class float64_(np_.float64):
 wrapped_types = {np_.ndarray : ndarray_, np_.int8 : int8_, np_.int16 : int16_, np_.int32 : int32_, np_.int64 : int64_, np_.uint8 : uint8_, np_.uint16 : uint16_, np_.uint32 : uint32_, np_.uint64 : uint64_, np_.float16 : float16_, np_.float32 : float32_, np_.float64 : float64_}
 scalar_wrapper_types = {np_.int8 : int8_, np_.int16 : int16_, np_.int32 : int32_, np_.int64 : int64_, np_.uint8 : uint8_, np_.uint16 : uint16_, np_.uint32 : uint32_, np_.uint64 : uint64_, np_.float16 : float16_, np_.float32 : float32_, np_.float64 : float64_}
 
-# function - gradient function mapping
-grad_fn_mapping = {np.dot : dot_grad, np.asarray : identity_grad}
-
 for name, obj in np_.__dict__.items():
 
     # wrap all values
