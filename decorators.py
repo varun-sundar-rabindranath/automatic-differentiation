@@ -89,8 +89,8 @@ def primitive(func):
             ret.alias = names.get_uniq_name()
 
         # record operation
-        if func.__class__.__name__ == "functions":
-            ds.records.append(Record(args, kwargs, ret, func, ret.alias)
+        if func.__class__.__name__ == "function":
+            ds.records.append(Record(args, kwargs, ret, func, ret.alias))
 
         # make a node for the graph
         #if func.__class__.__name__ == "function":
