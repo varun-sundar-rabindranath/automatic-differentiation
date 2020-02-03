@@ -1,11 +1,6 @@
 import numpy as np_
 from functools import wraps
 from decorators import *
-from graph import Graph
-
-from grad_fns import dot_grad, identity_grad
-
-cgraph = Graph()
 
 #class ndarray_(np.ndarray):
 #    pass
