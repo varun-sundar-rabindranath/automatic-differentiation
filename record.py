@@ -9,7 +9,6 @@ class Record:
         self.op = op
         self.name = name
 
-
     def __str__(self):
 
         s = ""
