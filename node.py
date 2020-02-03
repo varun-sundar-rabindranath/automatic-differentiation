@@ -22,12 +22,15 @@ class Node:
         self.op = op
         self.name = name
 
-        # assign the grad function mapping
-        #if grad_fn_mapping.get(self.op) is None:
-        #    print ("Grad function not implemented for ", self.op)
-        #    assert False and "You are a failure"
+        print ("grad fn mapping ", grad_fn_mapping)
+        print ("operation ", self.op)
 
-        #self.grad_fn = grad_fn_mapping[self.op]
+        # assign the grad function mapping
+        if grad_fn_mapping.get(self.op) is None:
+           print ("Grad function not implemented for ", self.op)
+           assert False and "You are a failure"
+
+        self.grad_fn = grad_fn_mapping[self.op]
 
     def __str__(self):
 
