@@ -2,22 +2,35 @@
 
 from graph_utils import draw_graph
 from queue import PriorityQueue
+from record import Record
+from node import Node
+import ad_numpy as anp
 
 class Graph:
 
     # constructor
-    def __init__(self):
-        self.a = 0
+    def __init__(self, records):
         self.nodes = {}
         self.edges = {}
 
-    def make_graph(self, outputs):
-        pass
+        # construct graph from records
+        for r in records:
+            n = Node()
+            n.make_node(args = r.args, kwargs = r.kwargs, outputs = r.outputs, op = r.op, name = r.name)
+            self.add_node(n)
+
+            # edges are between the inputs and the outputs
+            # get alias names of stuff in args and kwargs
+            edge_src = list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), list(r.args))) + \
+                       list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), r.kwargs.values()))
+
+            for u in edge_src:
+                self.add_edge(u.alias, r.outputs.alias)
 
     def add_node(self, n):
-        assert self.nodes.get(n.alias) is None and "Node of this name already available"
-        assert n.alias is not None and "Node has no name"
-        self.nodes[n.alias] = n
+        assert self.nodes.get(n.name) is None and "Node of this name already available"
+        assert n.name is not None and "Node has no name"
+        self.nodes[n.name] = n
 
     def add_edge(self, u, v):
         if self.edges.get(u) is None:
@@ -69,11 +82,11 @@ class Graph:
                 # sum from parents; since we are going backwards
                 # the actual edges are the parents
                 g = 0.0
-                for parent in self.edges[backprop_node.alias]:
-                    if parent.grad_wrt_args.get(backprop_node.alias) is not None:
-                        g = g + parent.grad_wrt_args.get(backprop_node.alias)
-                    if parent.grad_wrt_kwargs.get(backprop_node.alias) is not None:
-                        g = g + parent.grad_wrt_kwargs.get(backprop_node.alias)
+                for parent in self.edges[backprop_node.name]:
+                    if parent.grad_wrt_args.get(backprop_node.name) is not None:
+                        g = g + parent.grad_wrt_args.get(backprop_node.name)
+                    if parent.grad_wrt_kwargs.get(backprop_node.name) is not None:
+                        g = g + parent.grad_wrt_kwargs.get(backprop_node.name)
                 backprop_node.grad = g
 
             assert backprop_node.grad_fn is not None and "can't calc. gradient"

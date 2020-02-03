@@ -1,6 +1,7 @@
 import numpy as np
 import ad_numpy as anp
 import global_ds as ds
+from graph import Graph
 
 a = anp.asarray([1,2,3])
 b = anp.asarray([4,5,6])
@@ -17,9 +18,9 @@ print ("D type : ", type(d), " | Name : ", d.alias)
 
 for r in ds.records:
     print (r)
+cgraph = Graph(ds.records)
 
-#print ("g.a : ", anp.cgraph.a)
-#anp.cgraph.print_nodes()
-#anp.cgraph.print_edges()
+cgraph.print_nodes()
+cgraph.print_edges()
 #anp.cgraph.draw_graph()
-#print ("Topological sort ", anp.cgraph.toposort())
+print ("Topological sort ", cgraph.toposort())

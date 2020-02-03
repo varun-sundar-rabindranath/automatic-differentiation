@@ -92,21 +92,6 @@ def primitive(func):
         if func.__class__.__name__ == "function":
             ds.records.append(Record(args, kwargs, ret, func, ret.alias))
 
-        # make a node for the graph
-        #if func.__class__.__name__ == "function":
-        #    # only functions are nodes
-        #    n = Node()
-        #    n.make_node(args = args, kwargs = kwargs, outputs = ret, op = func, name = ret.alias)
-        #    anp.cgraph.add_node(n)
-
-        #    # edges are between the inputs and the outputs
-        #    # get alias names of stuff in args and kwargs
-        #    edge_src = list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), list(args))) + \
-        #               list(filter(lambda arg : type(arg) in anp.wrapped_types.values(), kwargs.values()))
-
-        #    for u in edge_src:
-        #        anp.cgraph.add_edge(u.alias, ret.alias)
-
         return ret
 
     return wrapper_primitive_
