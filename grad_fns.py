@@ -2,6 +2,7 @@
 
 import numpy as np
 from ad_numpy import wrapped_types
+import ad_numpy as anp
 
 # a and b are the 1D input vectors are c is the output scalar
 # return gradients w.r.t a and b in that order
@@ -110,4 +111,5 @@ def identity_grad(args, kwargs, output, crule_grad):
     return ig
 
 # function - gradient function mapping
-grad_fn_mapping = {np.dot : dot_grad, np.asarray : identity_grad}
+grad_fn_mapping = {"dot" : dot_grad, "asarray" : identity_grad, \
+                   "__add__" : identity_grad}

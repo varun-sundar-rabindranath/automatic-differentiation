@@ -14,7 +14,7 @@ class Graph:
         self.edges = {}
 
         # construct graph from records
-        for r in records:
+        for k, r in records.items():
             n = Node()
             n.make_node(args = r.args, kwargs = r.kwargs, outputs = r.outputs, op = r.op, name = r.name)
             self.add_node(n)

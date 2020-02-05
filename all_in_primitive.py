@@ -6,9 +6,14 @@ from graph import Graph
 a = anp.asarray([1,2,3])
 b = anp.asarray([4,5,6])
 
+x = anp.asarray([1,2,3])
+y = anp.asarray([4,5,6])
+
 print ("a ", a, " | b ", b)
 
 c = a + b
+
+z = x + y
 d = anp.dot(c, b)
 
 print ("A type : ", type(a), " | Name : ", a.alias)

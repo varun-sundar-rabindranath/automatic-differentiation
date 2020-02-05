@@ -20,6 +20,14 @@ def print_args(func):
 
     return wrapper_print_args
 
+def print_args_kwargs(args, kwargs):
+
+    args_lst = list(args)
+    for arg in args_lst:
+        print("Arg ", arg)
+    for kw in kwargs.keys():
+        print("KW : ", kw, " | ", kwargs[kw])
+
 def say_adnp(func):
 
     def wrapper_say_adnp(*args, **kwargs):
@@ -65,13 +73,7 @@ def primitive(func):
     @wraps(func)
     def wrapper_primitive_(*args, **kwargs):
 
-        print ("function ", func)
-        args_lst = list(args)
-        for arg in args_lst:
-            print("Arg ", arg)
-        for kw in kwargs.keys():
-            print("KW : ", kw, " | ", kwargs[kw])
-
+        #print_args_kwargs(args, kwargs):
 
         # what if the inputs are of wrapped types ?
         args = wrap_args(args)
@@ -90,7 +92,7 @@ def primitive(func):
 
         # record operation
         if func.__class__.__name__ == "function":
-            ds.records.append(Record(args, kwargs, ret, func, ret.alias))
+            ds.records[ret.alias] = Record(args, kwargs, ret, func.__name__, ret.alias)
 
         return ret
 

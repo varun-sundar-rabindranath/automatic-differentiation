@@ -1,5 +1,7 @@
 # Node class for graph
 
+from ad_numpy import ndarray_
+from decorators import primitive
 from grad_fns import grad_fn_mapping
 
 class Node:
@@ -21,9 +23,6 @@ class Node:
         self.outputs = outputs
         self.op = op
         self.name = name
-
-        print ("grad fn mapping ", grad_fn_mapping)
-        print ("operation ", self.op)
 
         # assign the grad function mapping
         if grad_fn_mapping.get(self.op) is None:
