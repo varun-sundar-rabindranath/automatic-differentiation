@@ -27,7 +27,9 @@ def dot_2Dx2D_grad(a, b, c, crule_grad):
     # every row of a vs every column of b
     for i in range(nr):
         for j in range(nc):
-            g_bj, g_ai = dot_1Dx1D_grad(a[i,:], b[:,j], c[i][j])
+            g_ai, g_bj = dot_1Dx1D_grad(a[i,:], b[:,j], c[i][j], crule_grad)
+
+            print ("1Dx1D ", a[i,:], b[:,j], g_ai, g_bj)
 
             # update gradient w.r.t the jth column of b
             gb[:,j] = gb[:,j] + g_bj
@@ -48,7 +50,7 @@ def dot_1Dx2D_grad(a, b, c):
 
     # the row of a against every column of b
     for j in range(nc):
-            g_bj, g_a = dot_1Dx1D_grad(a, b[:,j], c[j])
+            g_bj, g_a = dot_1Dx1D_grad(a, b[:,j], c[j], crule_grad)
 
             # update gradient w.r.t the jth column of b
             gb[:,j] = gb[:,j] + g_bj
@@ -69,7 +71,7 @@ def dot_2Dx1D_grad(a, b, c, crule_grad):
 
     # every row of a vs the column b
     for i in range(nr):
-        g_b, g_ai = dot_1Dx1D_grad(a[i,:], b, c[i])
+        g_b, g_ai = dot_1Dx1D_grad(a[i,:], b, c[i], crule_grad)
 
         # update gradient w.r.t the jth column of b
         gb = gb + g_b
@@ -112,4 +114,4 @@ def identity_grad(args, kwargs, output, crule_grad):
 
 # function - gradient function mapping
 grad_fn_mapping = {"dot" : dot_grad, "asarray" : identity_grad, \
-                   "__add__" : identity_grad}
+        "__add__" : identity_grad, "sum" : identity_grad}
