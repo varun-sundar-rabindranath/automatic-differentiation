@@ -82,7 +82,8 @@ class Graph:
                 # sum from parents; since we are going backwards
                 # the actual edges are the parents
                 g = 0.0
-                for parent in self.edges[backprop_node.name]:
+                for parent_name in self.edges[backprop_node.name]:
+                    parent = self.nodes.get(parent_name)
                     if parent.grad_wrt_args.get(backprop_node.name) is not None:
                         g = g + parent.grad_wrt_args.get(backprop_node.name)
                     if parent.grad_wrt_kwargs.get(backprop_node.name) is not None:

@@ -8,15 +8,15 @@ import ad_numpy as anp
 # return gradients w.r.t a and b in that order
 def dot_1Dx1D_grad(a, b, c, crule_grad):
     # sanity check
-    assert len(shape(a)) == 1
-    assert len(shape(b)) == 1
+    assert len(a.shape) == 1
+    assert len(b.shape) == 1
     return b * crule_grad, a * crule_grad
 
 def dot_2Dx2D_grad(a, b, c, crule_grad):
 
     # sanity check
-    assert len(shape(a)) == 2
-    assert len(shape(b)) == 2
+    assert len(a.shape) == 2
+    assert len(b.shape) == 2
 
     ga = np.zeros_like(a)
     gb = np.zeros_like(b)
@@ -38,8 +38,8 @@ def dot_2Dx2D_grad(a, b, c, crule_grad):
 def dot_1Dx2D_grad(a, b, c):
 
     # sanity check
-    assert len(shape(a)) == 1
-    assert len(shape(b)) == 2
+    assert len(a.shape) == 1
+    assert len(b.shape) == 2
 
     ga = np.zeros_like(a)
     gb = np.zeros_like(b)
@@ -59,8 +59,8 @@ def dot_1Dx2D_grad(a, b, c):
 def dot_2Dx1D_grad(a, b, c, crule_grad):
 
     # sanity check
-    assert len(shape(a)) == 2
-    assert len(shape(b)) == 1
+    assert len(a.shape) == 2
+    assert len(b.shape) == 1
 
     ga = np.zeros_like(a)
     gb = np.zeros_like(b)
