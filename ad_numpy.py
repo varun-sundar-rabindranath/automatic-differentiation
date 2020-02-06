@@ -347,5 +347,3 @@ for name, obj in np_.__dict__.items():
         globals()[name] = primitive(obj)
     else:
         globals()[name] = obj
-
-#globals()['ndarray'] = ndarray_
