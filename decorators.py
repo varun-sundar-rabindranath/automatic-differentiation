@@ -79,7 +79,6 @@ def primitive(func):
         args = wrap_args(args)
         kwargs = wrap_kwargs(kwargs)
 
-        #print (func)
         ret = func(*args, **kwargs)
 
         ret = wrap_thing(ret)
@@ -91,7 +90,10 @@ def primitive(func):
             ret.alias = names.get_uniq_name()
 
         # record operation
-        if func.__class__.__name__ == "function":
+        # if there is indeed some return value and is a function
+        if ret is not None and \
+           (func.__class__.__name__ == "function" or \
+           func.__class__.__name__ == "builtin_function_or_method") :
             ds.records[ret.alias] = Record(args, kwargs, ret, func.__name__, ret.alias)
 
         return ret
